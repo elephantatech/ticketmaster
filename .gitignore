@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+*.venv
+venv.bak/
+.env
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Flask instance-related
+instance/
+
+# SQLite database files (if used)
+*.sqlite
+
+# Logs
+*.log
+
+# IDE-related
+.vscode/
+.idea/
+
+# Miscellaneous
+*.swp
+.DS_Store

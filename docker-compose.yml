@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    environment:
+      - REDIS_URL=redis://:your_redis_password@redis:6379
+    command: uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000 --log-config=logging.ini
+    volumes:
+      - ./app:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:latest"
+    command: ["redis-server", "--requirepass", "your_redis_password", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
+volumes:
+  redis-data:

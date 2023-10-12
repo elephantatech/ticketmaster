@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "ticketmaster"
+version = "0.1.0"
+description = ""
+authors = ["Elephantatech <vivekm.mistry@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.103.2"}
+uvicorn = {extras = ["all"], version = "^0.23.2"}
+aioredis = "^2.0.1"
+redis = "^5.0.1"
+python-dotenv = "^1.0.0"
+pydantic = {extras = ["all"], version = "^2.4.2"}
+pydantic-settings = "^2.0.3"
+python-json-logger = "^2.0.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^4.1.0"
+black = "^23.9.1"
+flake8 = "^6.1.0"
+httpx = "^0.25.0"
+pytest-asyncio = "^0.21.1"
+mypy = "^1.6.0"
+pylint = "^3.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

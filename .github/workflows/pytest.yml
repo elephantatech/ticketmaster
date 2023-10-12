@@ -1,0 +1,39 @@
+name: Run Pytest
+
+on:
+  push:
+    branches:
+      - main  # Adjust with your default branch if not "main"
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Adjust based on your Python version
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+
+    - name: Install dependencies using Poetry
+      run: |
+        poetry install
+
+    - name: Run pytest
+      run: poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests
+
+    - name: Update README.md with test results
+      run: echo "Test Results:" $(poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests) >> README.md
+
+    - name: Push README changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "Update README.md with test results"
+        git push
