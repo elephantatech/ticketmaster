@@ -39,3 +39,5 @@ jobs:
         git config --global user.name "GitHub Action"
         git add md_report.md
         git diff --quiet && git diff --staged --quiet || (git commit -m 'Update pytest results'; git push)
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
