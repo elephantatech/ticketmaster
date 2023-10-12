@@ -27,11 +27,11 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pytest --cov=./app --cov-report=term --cov-fail-under=70  tests
+        poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70  tests
 
     - name: Run tests with pytest
       run: |
-        pytest --md-report --md-report-flavor gfm --md-report-output md_report.md
+        poetry run pytest --md-report --md-report-flavor gfm --md-report-output md_report.md
 
     - name: Commit and push if changed
       run: |
