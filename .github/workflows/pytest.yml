@@ -25,15 +25,17 @@ jobs:
       run: |
         poetry install
 
-    - name: Run pytest
-      run: poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests
-
-    - name: Update README.md with test results
-      run: echo "Test Results:" $(poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests) >> README.md
-
-    - name: Push README changes
+    - name: Run tests with pytest
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -am "Update README.md with test results"
-        git push
+        pytest --cov=./app --cov-report=term --cov-fail-under=70  tests
+
+    - name: Run tests with pytest
+      run: |
+        pytest --md-report --md-report-flavor gfm --md-report-output md_report.md
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Action"
+        git add md_report.md
+        git diff --quiet && git diff --staged --quiet || (git commit -m 'Update pytest results'; git push)

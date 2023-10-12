@@ -8,7 +8,7 @@ A simple ticket management API built with FastAPI.
   - [Prerequisites](#prerequisites)
   - [Installing](#installing)
 - [Running the Tests](#tests)
-- [Test Results](#test-results)
+- [Test Results](md_report.md)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)]
@@ -45,8 +45,6 @@ Run tests using pytest:
 ```bash
 poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests
 ```
-
-## Test Results
 
 ## Usage
 

@@ -74,7 +74,8 @@ class MockRedis:
 
     async def expire(self, key, ttl):
         """Simulate the expire operation of Redis.
-        Note: This mock implementation does not actually do anything related to expiration."""
+        Note: This mock implementation does not actually do anything related to expiration.
+        """
 
 
 def test_create_ticket(monkeypatch):
@@ -111,13 +112,24 @@ def test_get_ticket(monkeypatch):
     )
 
     ticket_id = list(mock_redis.store.keys())[0]
-    print(ticket_id)
     response = client.get(f"/tickets/{ticket_id}/")
-    print(response.json())
     assert response.status_code == 200
     data = response.json()
     assert data["title"] == "Test Ticket"
     assert data["status"] == "Open"
+
+
+def test_get_ticket_not_found(monkeypatch):
+    """
+    Test the endpoint to retrieve a ticket using its unique ID.
+    Validates if not valid ticket with id exists in the redis store.
+    """
+    mock_redis = MockRedis()
+    app.state.redis = mock_redis
+    monkeypatch.setattr(app.state, "redis", mock_redis)
+    response = client.get("/tickets/123456/")
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Ticket not found"}
 
 
 def test_update_ticket(monkeypatch):
@@ -143,6 +155,20 @@ def test_update_ticket(monkeypatch):
     assert data["status"] == "Updated"
 
 
+def test_update_ticket_not_found(monkeypatch):
+    """
+    Test the endpoint to update the attributes of a ticket using its unique ID.
+    Validates if the ticket is not found if the ticket is not in the redis store.
+    """
+    mock_redis = MockRedis()
+    app.state.redis = mock_redis
+    monkeypatch.setattr(app.state, "redis", mock_redis)
+    updatedata = {"status": "Updated", "title": "Test Ticket Updated", "details": ""}
+    response = client.put("/tickets/12345/", json=updatedata)
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Ticket not found"}
+
+
 def test_delete_ticket(monkeypatch):
     """
     Test the endpoint to delete a ticket using its unique ID.
@@ -161,6 +187,19 @@ def test_delete_ticket(monkeypatch):
 
     response = client.delete(f"/tickets/{ticket_id}/")
     assert response.status_code == 200
+
+
+def test_delete_ticket_not_found(monkeypatch):
+    """
+    Test the endpoint to delete a ticket using its unique ID.
+    Validates the successful deletion.
+    """
+    mock_redis = MockRedis()
+    app.state.redis = mock_redis
+    monkeypatch.setattr(app.state, "redis", mock_redis)
+    response = client.delete("/tickets/123455")
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Ticket not found"}
 
 
 def test_get_all_ticket(monkeypatch):

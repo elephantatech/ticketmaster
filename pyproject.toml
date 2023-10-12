@@ -15,6 +15,7 @@ python-dotenv = "^1.0.0"
 pydantic = {extras = ["all"], version = "^2.4.2"}
 pydantic-settings = "^2.0.3"
 python-json-logger = "^2.0.7"
+pytest-md-report = "^0.5.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^4.1.0"
@@ -28,3 +29,8 @@ pylint = "^3.0.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+md_report = true
+md_report_verbose = 1
+md_report_color = "never"
