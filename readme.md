@@ -100,5 +100,4 @@ If you modify the code or add new dependencies, you might need to rebuild the Do
 5. Open a pull request.
 
 ## License
-
-See license at [LICENSE](LICENSE)
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
