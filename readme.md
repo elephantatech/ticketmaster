@@ -101,4 +101,4 @@ If you modify the code or add new dependencies, you might need to rebuild the Do
 
 ## License
 
-TBD opensource license
+See license at [LICENSE](LICENSE}
