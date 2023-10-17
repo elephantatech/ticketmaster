@@ -11,7 +11,7 @@ A simple ticket management API built with FastAPI.
 - [Test Results](md_report.md)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)]
+- [License](#license)
 
 ## Getting Started
 [![Run Pytest](https://github.com/elephantatech/ticketmaster/actions/workflows/pytest.yml/badge.svg)](https://github.com/elephantatech/ticketmaster/actions/workflows/pytest.yml)
