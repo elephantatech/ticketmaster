@@ -19,7 +19,7 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install pdm
-        pdm install -d
+        pdm install -d --no-self --no-editable
         # install other dependencies...
     - name: Run tests with coverage
       run: pdm run coverage
