@@ -11,20 +11,20 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.11  # Adjust based on your Python version
-
-    - name: Install Poetry
+        python-version: 3.11
+    - name: Install dependencies
       run: |
-        curl -sSL https://install.python-poetry.org | python3 -
-
-    - name: Install dependencies using Poetry
-      run: |
-        poetry install
-
-    - name: Run tests with pytest
-      run: |
-        poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70  tests
+        pip install --upgrade pip
+        pip install pdm
+        pdm install -d
+        # install other dependencies...
+    - name: Run tests with coverage
+      run: pdm run coverage
+    - name: Upload coverage to CodeCov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage.xml
+        fail_ci_if_error: true # optional
