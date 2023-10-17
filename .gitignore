@@ -32,3 +32,6 @@ instance/
 # Miscellaneous
 *.swp
 .DS_Store
+.pdm-python
+.github/workflows/coverage.yml
+coverage.xml

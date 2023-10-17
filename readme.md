@@ -20,7 +20,7 @@ A simple ticket management API built with FastAPI.
 
 - Python 3.x
 - Redis 6.2
-- poetry
+- pdm
 - docker
 - docker compose
 
@@ -32,11 +32,11 @@ A simple ticket management API built with FastAPI.
     git clone https://github.com/yourusername/ticketmaster.git
     ```
 
-2. Install dependencies using Poetry
+2. Install dependencies using pdm
 
     ```bash
     cd ticketmaster
-    poetry install
+    pdm install
     ```
 
 ## Tests
@@ -44,7 +44,7 @@ A simple ticket management API built with FastAPI.
 Run tests using pytest:
 
 ```bash
-poetry run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests
+pdm run pytest --cov=./app --cov-report=term --cov-fail-under=70 -vvv tests
 ```
 
 ## Usage

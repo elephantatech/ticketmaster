@@ -1,23 +1,29 @@
-[tool.poetry]
+[project]
 name = "ticketmaster"
 version = "0.1.0"
 description = ""
-authors = ["Elephantatech <vivekm.mistry@gmail.com>"]
+authors = [
+    {name = "Elephantatech", email = "vivekm.mistry@gmail.com"},
+]
+dependencies = [
+    "fastapi[all]<1.0.0,>=0.103.2",
+    "uvicorn[all]<1.0.0,>=0.23.2",
+    "aioredis<3.0.0,>=2.0.1",
+    "redis<6.0.0,>=5.0.1",
+    "python-dotenv<2.0.0,>=1.0.0",
+    "pydantic[all]<3.0.0,>=2.4.2",
+    "pydantic-settings<3.0.0,>=2.0.3",
+    "python-json-logger<3.0.0,>=2.0.7",
+    "pytest-md-report<1.0.0,>=0.5.0",
+]
+requires-python = ">=3.11"
 readme = "README.md"
+license = {text = "MIT"}
 
-[tool.poetry.dependencies]
-python = "^3.11"
-fastapi = {extras = ["all"], version = "^0.103.2"}
-uvicorn = {extras = ["all"], version = "^0.23.2"}
-aioredis = "^2.0.1"
-redis = "^5.0.1"
-python-dotenv = "^1.0.0"
-pydantic = {extras = ["all"], version = "^2.4.2"}
-pydantic-settings = "^2.0.3"
-python-json-logger = "^2.0.7"
-pytest-md-report = "^0.5.0"
+[project.optional-dependencies]
+server = ["uvicorn[all]>=0.23.2"]
 
-[tool.poetry.group.dev.dependencies]
+[project.group.dev.dependencies]
 pytest-cov = "^4.1.0"
 black = "^23.9.1"
 flake8 = "^6.1.0"
@@ -26,11 +32,30 @@ pytest-asyncio = "^0.21.1"
 mypy = "^1.6.0"
 pylint = "^3.0.1"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.pytest.ini_options]
 md_report = true
 md_report_verbose = 1
 md_report_color = "never"
+
+[tool.pdm]
+python_requires = ">=3.11"
+[tool.pdm.build]
+includes = []
+
+[tool.pdm.scripts]
+app = "uvicorn app.main:app --host 0.0.0.0 --port 8000"
+dev = "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+test = "pytest --cov=app --cov-report=term tests -vvv"
+coverage = "pdm run pytest --cov=app --cov-report=xml tests -vvv"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest-cov>=4.1.0",
+    "black>=23.10.0",
+    "pytest>=7.4.2",
+    "flake8>=6.1.0",
+    "pylint>=3.0.1",
+    "httpx>=0.25.0",
+    "mypy>=1.6.0",
+    "pytest-asyncio>=0.21.1",
+]

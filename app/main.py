@@ -21,6 +21,7 @@ import os
 import logging.config
 from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException
+import uvicorn
 
 from redis import asyncio as aioredis
 
@@ -188,8 +189,6 @@ async def delete_ticket(ticket_id: str) -> dict:
 
 
 if __name__ == "__main__":
-    import uvicorn
-
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
