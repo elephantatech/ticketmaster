@@ -14,7 +14,7 @@ colorama==0.4.6; sys_platform == "win32" or platform_system == "Windows"
 coverage==7.3.2
 DataProperty==1.0.1
 dill==0.3.7; python_version >= "3.11"
-dnspython==2.4.2
+dnspython==2.6.1
 email-validator==2.0.0.post2
 fastapi==0.111.0
 fastapi-cli==0.0.4
