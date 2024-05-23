@@ -35,7 +35,7 @@ mccabe==0.7.0
 mdurl==0.1.2
 mypy==1.10.0
 mypy-extensions==1.0.0
-orjson==3.9.9
+orjson==3.9.15
 packaging==23.2
 pathspec==0.11.2
 pathvalidate==3.2.0
