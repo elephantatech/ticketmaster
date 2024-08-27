@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  web:
+  api:
     build:
       context: .
       dockerfile: dockerfile
@@ -15,6 +15,16 @@ services:
       - 8000:8000
     depends_on:
       - redis
+  frontend:
+    build:
+      context: ./ticket-dashboard  # Path to the folder containing Dockerfile and React app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_URL: "http://api:8000"  # Ensure this matches your backend service name and port
   redis:
     image: "redis:latest"
     command:
